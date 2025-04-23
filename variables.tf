@@ -1,13 +1,14 @@
-variable "bucket_name" {
-  type = string
-}
- 
 variable "region" {
-  type    = string
-  default = "ap-south-1"
+  description = "The AWS region to deploy the KMS key."
+  type        = string
 }
 
-variable "versioning" {
-  type    = bool
-  default = false
+variable "description" {
+  description = "A description for the KMS key."
+  type        = string
+}
+
+variable "key_alias" {
+  description = "The alias name for your KMS key (e.g., alias/my-key)."
+  type        = string
 }
