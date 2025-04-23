@@ -1,0 +1,45 @@
+name: Create KMS Key
+
+on:
+  workflow_dispatch:
+    inputs:
+      key_alias:
+        description: "Alias name for the KMS key (e.g., alias/my-key)"
+        required: true
+        type: string
+      region:
+        description: "AWS region (e.g., us-east-1)"
+        required: true
+        type: string
+      description:
+        description: "Description for the KMS key"
+        required: true
+        type: string
+
+jobs:
+  create-kms-key:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::<ACCOUNT_ID>:role/Backstage.io
+          aws-region: ${{ inputs.region }}
+          role-session-name: backstage-session
+          audience: sts.amazonaws.com
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var="key_alias=${{ inputs.key_alias }}" -var="region=${{ inputs.region }}" -var="description=${{ inputs.description }}"
