@@ -10,7 +10,9 @@ terraform {
 
 
 resource "aws_kms_key" "kms_key" {
-  description             = var.description
+  description               = var.description
+    key_usage               = var.key_usage
+  customer_master_key_spec  = var.key_type
 }
 
 
