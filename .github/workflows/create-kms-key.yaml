@@ -48,8 +48,9 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var key_type=${{ github.event.inputs.key_type }} \
-                                           -var key_usage="${{ github.event.inputs.key_usage }}" \
-                                           -var key_alias=${{ github.event.inputs.key_alias }} \
-                                           -var region=${{ github.event.inputs.region }} \
-                                           -var description="${{ github.event.inputs.description }}"
+        run: terraform apply -auto-approve \
+          -var key_type="${{ inputs.key_type }}" \
+          -var key_usage="${{ inputs.key_usage }}" \
+          -var key_alias="${{ inputs.key_alias }}" \
+          -var region="${{ inputs.region }}" \
+          -var description="${{ inputs.description }}"
