@@ -2,7 +2,7 @@ name: Create KMS Key
 on:
   workflow_dispatch:
     inputs:
-      key-alias:
+      key_alias:
         description: "Alias name for the KMS key (e.g., alias/my-key)"
         required: true
         type: string
@@ -40,4 +40,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var key-alias=${{ inputs.key-alias }} -var region=${{ inputs.region }} -var description=${{ inputs.description }}
+        run: terraform apply -auto-approve -var key_alias=${{ github.event.inputs.key_alias }} -var region=${{ github.event.inputs.region }} -var description=${{ github.event.inputs.description }}
