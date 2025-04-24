@@ -2,6 +2,14 @@ name: Create KMS Key
 on:
   workflow_dispatch:
     inputs:
+      key_type:
+        description: "Type of KMS key"
+        required: true
+        type: string
+      key_usage:
+        description: "Usage of the KMS key"
+        required: true
+        type: string
       key_alias:
         description: "Alias name for the KMS key (e.g., alias/my-key)"
         required: true
@@ -40,4 +48,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var key_alias=${{ github.event.inputs.key_alias }} -var region=${{ github.event.inputs.region }} -var description="${{ github.event.inputs.description }}"
+        run: terraform apply -auto-approve -var key_type=${{ github.event.inputs.key_type }} -var key_usage=${{ github.event.inputs.key_usage }} -var key_alias=${{ github.event.inputs.key_alias }} -var region=${{ github.event.inputs.region }} -var description="${{ github.event.inputs.description }}"
