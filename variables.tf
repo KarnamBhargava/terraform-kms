@@ -8,7 +8,7 @@ variable "description" {
   type        = string
 }
 
-variable "key-alias" {
+variable "key_alias" {
   description = "The alias name for your KMS key (e.g., alias/my-key)."
   type        = string
 }
