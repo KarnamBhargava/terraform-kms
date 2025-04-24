@@ -13,3 +13,14 @@ variable "key_alias" {
   type        = string
 }
 
+variable "key_type" {
+  description = "Specifies the type of the customer master key (CMK)"
+  type        = string
+  default     = "SYMMETRIC_DEFAULT"
+}
+
+variable "key_usage" {
+  description = "Specifies the intended use of the CMK"
+  type        = string
+  default     = "ENCRYPT_DECRYPT"
+}
