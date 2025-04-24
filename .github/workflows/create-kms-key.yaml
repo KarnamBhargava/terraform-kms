@@ -1,5 +1,4 @@
 name: Create KMS Key
-
 on:
   workflow_dispatch:
     inputs:
